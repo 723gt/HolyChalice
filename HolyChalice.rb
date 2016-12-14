@@ -1,21 +1,9 @@
 #!/usr/bin/env ruby 
+require_relative "lib/constmod.rb"
 
 class HolyChalice
-  FRAST_LANCER = [0,0]
-  FRAST_SABER = [0,7]
-  FRAST_BERSERKER = [7,0]
-  SECOND_LANCER = [14,14]
-  SECOND_SABER = [14,7]
-  SECOND_BERSERKER = [7,14]
-  INFO_NUM = 22
-  TURN_NUM = 0
-  ALLA_NUM = 0
-  ALSA_NUM = 1
-  ALBE_NUM = 2
-  ENLA_NUM = 3
-  ENSA_NUM = 4
-  ENBE_NUM = 5
 
+  include Constmods
   def initialize
     start_info = gets.to_i
     
