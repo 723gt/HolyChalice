@@ -65,9 +65,9 @@ class HolyChalice
          end
        end
      else
-       16.times do |j|
-         if j != 0
-           @field_status[i][j - 1] = data[j]  
+       for x in 0 ... 15
+         for y in 1 .. 15
+             @field_status[x][y - 1] = data[y]  
          end
        end  
      end
