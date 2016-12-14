@@ -44,23 +44,23 @@ class HolyChalice
 
   def turn_info
    22.times do |i|
-     data = get_data().to_i
+     data = get_data().chomp.to_i
      if i == INFO_NUM
        @turn_status = data
-     elsif i > INFO_NUM && i <= ENBE_NUM
-       for data.length - 1 do |j|
+     elsif i <= ENBE_NUM
+       for  j in 0 ... 22 do 
          case i
-         when ALLA_NUM
+         when ALLA_NUM + 1
            @ally_lancer[j] = data[j]
-         when ALSA_NUM
+         when ALSA_NUM + 1
            @ally_saber[j] = data[j]
-         when ALBE_NUM
+         when ALBE_NUM + 1
            @ally_berserker[j] = data[j]
-         when ENLA_NUM
+         when ENLA_NUM + 1
            @enemy_lancer[j] = data[j]
-         when ENSA_NUM
+         when ENSA_NUM + 1
            @enemy_saber[j] = data[j]
-         when ENBE_NUM 
+         when ENBE_NUM + 1
            @enemy_berserker[j] = data[j]
          end
        end
@@ -72,5 +72,9 @@ class HolyChalice
        end  
      end
    end  
+  end
+
+  def get_data
+    return gets.to_s
   end
 end
