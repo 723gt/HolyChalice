@@ -3,7 +3,7 @@ require_relative "lib/constmod"
 
 class HolyChalice
 
-  include Constmods
+  include Constmod
   def initialize
     start_info = gets.to_i
     

@@ -1,4 +1,4 @@
-module Constmods
+module Constmod
   FRAST_LANCER = [0,0]
   FRAST_SABER = [0,7]
   FRAST_BERSERKER = [7,0]
