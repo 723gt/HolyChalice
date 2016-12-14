@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby 
-require_relative "lib/constmod.rb"
+require_relative "lib/constmod"
 
 class HolyChalice
 
