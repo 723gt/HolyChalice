@@ -33,35 +33,51 @@ class HolyChalice
   def turn_info
    fieldcnt = 0
    22.times do |i|
-     puts "time:#{i}"
      data = get_data().chomp.gsub(" ","")
-     print "data:"
-     p data
      if i == TURN_NUM
-       puts "turn"
        @turn_status = data
      elsif i <= ENBE_NUM + 1
-       puts "play"
-       for  j in 0 ... 5 do 
-         numdata = data[j].to_i
+       minusmv = 0
+       datasize = data.length
+       for j in 0 ... datasize do 
          case i
          when ALLA_NUM + 1
-           @ally_lancer[j] = numdata
+           @ally_lancer[j] = data[j].to_i
          when ALSA_NUM + 1
-           @ally_saber[j] = numdata
+           @ally_saber[j] = data[j].to_i
          when ALBE_NUM + 1
-           @ally_berserker[j] = numdata
+           @ally_berserker[j] = data[j].to_i
          when ENLA_NUM + 1
-           @enemy_lancer[j] = numdata
+           if data[j + minusmv] == "-"
+             minusmv += 1
+             num = data[j + minusmv].to_i * -1
+           else
+             num = data[j + minusmv].to_i
+           end
+           @enemy_lancer[j] = num
          when ENSA_NUM + 1
-           @enemy_saber[j] = numdata
+           if data[j + minusmv] == "-"
+             minusmv += 1
+             num = data[j + minusmv].to_i * -1
+           else
+             num = data[j + minusmv].to_i
+           end
+           @enemy_saber[j] = num
          when ENBE_NUM + 1
-           @enemy_berserker[j] = numdata
+           if data[j + minusmv ] == "-"
+             minusmv += 1
+             num = data[j + minusmv].to_i * -1
+           else
+             num = data[j + minusmv].to_i
+           end
+           @enemy_berserker[j] = num
+         end
+         if j + minusmv > 5
+           break
          end
        end
      else
        tmparray = Array.new
-       puts "field"
        for x in 0 ... 15
          tmparray[x] = data[x].to_i
        end  
