@@ -8,7 +8,7 @@ class HolyChalice
     start_info = gets.to_i
     
     @turn_status = nil
-    @field_status = Array.new(15,Array.new)
+    @field_status = Array.new
     case start_info
     when 0
       @ally_lancer = FRAST_LANCER
@@ -31,33 +31,42 @@ class HolyChalice
   end
 
   def turn_info
+   fieldcnt = 0
    22.times do |i|
-     data = get_data().chomp.to_i
-     if i == INFO_NUM
+     puts "time:#{i}"
+     data = get_data().chomp.gsub(" ","")
+     print "data:"
+     p data
+     if i == TURN_NUM
+       puts "turn"
        @turn_status = data
-     elsif i <= ENBE_NUM
-       for  j in 0 ... 22 do 
+     elsif i <= ENBE_NUM + 1
+       puts "play"
+       for  j in 0 ... 5 do 
+         numdata = data[j].to_i
          case i
          when ALLA_NUM + 1
-           @ally_lancer[j] = data[j]
+           @ally_lancer[j] = numdata
          when ALSA_NUM + 1
-           @ally_saber[j] = data[j]
+           @ally_saber[j] = numdata
          when ALBE_NUM + 1
-           @ally_berserker[j] = data[j]
+           @ally_berserker[j] = numdata
          when ENLA_NUM + 1
-           @enemy_lancer[j] = data[j]
+           @enemy_lancer[j] = numdata
          when ENSA_NUM + 1
-           @enemy_saber[j] = data[j]
+           @enemy_saber[j] = numdata
          when ENBE_NUM + 1
-           @enemy_berserker[j] = data[j]
+           @enemy_berserker[j] = numdata
          end
        end
      else
+       tmparray = Array.new
+       puts "field"
        for x in 0 ... 15
-         for y in 1 .. 15
-             @field_status[x][y - 1] = data[y]  
-         end
+         tmparray[x] = data[x].to_i
        end  
+       @field_status[fieldcnt] = tmparray
+       fieldcnt += 1  
      end
    end  
   end
