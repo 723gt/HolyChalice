@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby 
+
 require_relative "lib/constmod"
 require_relative "lib/getmethod"
 
