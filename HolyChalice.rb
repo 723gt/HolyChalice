@@ -48,21 +48,9 @@ class HolyChalice
          when ALBE_NUM + 1
            @ally_berserker[j] = data[j].to_i
          when ENLA_NUM + 1
-           if data[j + $minusmv] == "-"
-             $minusmv += 1
-             num = data[j + $minusmv].to_i * -1
-           else
-             num = data[j + $minusmv].to_i
-           end
-           @enemy_lancer[j] = num
+           @enemy_lancer[j] = check_minus(data,j)
          when ENSA_NUM + 1
-           if data[j + $minusmv] == "-"
-             $minusmv += 1
-             num = data[j + $minusmv].to_i * -1
-           else
-             num = data[j + $minusmv].to_i
-           end
-           @enemy_saber[j] = num
+           @enemy_saber[j] = check_minus(data,j)
          when ENBE_NUM + 1
            @enemy_berserker[j] = check_minus(data,j)
          end
