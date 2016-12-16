@@ -3,9 +3,11 @@ require_relative "lib/constmod"
 require_relative "lib/getmethod"
 
 class HolyChalice
-  $minusmv = nil
   include Constmod
   include Getmethod
+  
+  $minusmv = nil
+  
   def initialize
     start_info = gets.to_i
     
