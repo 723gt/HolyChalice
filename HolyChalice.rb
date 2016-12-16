@@ -14,7 +14,7 @@ class HolyChalice
     @turn_status = nil
     @field_status = Array.new
     case start_info
-    when 0
+    when FRAST_PLAY
       @ally_lancer = FRAST_LANCER
       @ally_saber = FRAST_SABER
       @ally_berserker = FRAST_BERSERKER
@@ -22,7 +22,7 @@ class HolyChalice
       @enemy_lancer = SECOND_LANCER
       @enemy_saber = SECOND_SABER
       @enemy_berserker = SECOND_BERSERKER
-    when 1
+    when SECOND_PLAY
       @ally_lancer = SECOND_LANCER
       @ally_saber = SECOND_SABER
       @ally_berserker = SECOND_BERSERKER
@@ -31,44 +31,44 @@ class HolyChalice
       @enemy_saber = FRAST_SABER
       @enemy_berserker = FRAST_BERSERKER
     end
-    puts 0
+    puts START_RES
   end
 
   def turn_info
-   fieldcnt = 0
-   22.times do |i|
+   fieldcnt = ZERO_INIT
+   INFO_NUM.times do |i|
      data = get_data().chomp.gsub(" ","")
      if i == TURN_NUM
        @turn_status = data
-     elsif i <= ENBE_NUM + 1
-       $minusmv = 0
+     elsif i <= ENBE_NUM + COUNT_ADD
+       $minusmv = ZERO_INIT
        datasize = data.length
-       for j in 0 ... datasize do 
+       for j in INFO_START ... datasize do 
          case i
-         when ALLA_NUM + 1
+         when ALLA_NUM + PLAYER_SHIFT
            @ally_lancer[j] = data[j].to_i
-         when ALSA_NUM + 1
+         when ALSA_NUM + PLAYER_SHIFT
            @ally_saber[j] = data[j].to_i
-         when ALBE_NUM + 1
+         when ALBE_NUM + PLAYER_SHIFT
            @ally_berserker[j] = data[j].to_i
-         when ENLA_NUM + 1
+         when ENLA_NUM + PLAYER_SHIFT
            @enemy_lancer[j] = check_minus(data,j)
-         when ENSA_NUM + 1
+         when ENSA_NUM + PLAYER_SHIFT
            @enemy_saber[j] = check_minus(data,j)
-         when ENBE_NUM + 1
+         when ENBE_NUM + PLAYER_SHIFT
            @enemy_berserker[j] = check_minus(data,j)
          end
-         if j + $minusmv > 5
+         if j + $minusmv > PLAYER_STAT
            break
          end
        end
      else
        tmparray = Array.new
-       for x in 0 ... 15
+       for x in FIELD_MIN ... FIELD_MAX
          tmparray[x] = data[x].to_i
        end  
        @field_status[fieldcnt] = tmparray
-       fieldcnt += 1  
+       fieldcnt += COUNT_ADD  
      end
    end  
   end
@@ -76,10 +76,10 @@ class HolyChalice
   private 
 
   def check_minus(data,j)
-    num = 0
+    num = ZERO_INIT
     if data[j + $minusmv ] == "-"
-      $minusmv += 1
-      num = data[j + $minusmv].to_i * -1
+      $minusmv += COUNT_ADD
+      num = data[j + $minusmv].to_i * REVERCE_MINUS
     else
       num = data[j + $minusmv].to_i
     end

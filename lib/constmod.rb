@@ -5,6 +5,14 @@ module Constmod
   SECOND_LANCER = [14,14]
   SECOND_SABER = [14,7]
   SECOND_BERSERKER = [7,14]
+  START_RES = 0
+  ZERO_INIT = 0
+  PLAYER_STAT = 5
+  FRAST_PLAY = 0
+  SECOND_PLAY = 1
+  PLAYER_SHIFT = 1
+  COUNT_ADD = 1
+  INFO_START = 0
   INFO_NUM = 22
   TURN_NUM = 0
   ALLA_NUM = 0
@@ -13,4 +21,7 @@ module Constmod
   ENLA_NUM = 3
   ENSA_NUM = 4
   ENBE_NUM = 5
+  FIELD_MIN = 0
+  FIELD_MAX = 15
+  REVERCE_MINUS = -1
 end
