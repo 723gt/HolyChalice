@@ -2,7 +2,7 @@
 require_relative "lib/constmod"
 
 class HolyChalice
-
+  $minusmv = nil
   include Constmod
   def initialize
     start_info = gets.to_i
@@ -37,7 +37,7 @@ class HolyChalice
      if i == TURN_NUM
        @turn_status = data
      elsif i <= ENBE_NUM + 1
-       minusmv = 0
+       $minusmv = 0
        datasize = data.length
        for j in 0 ... datasize do 
          case i
@@ -48,31 +48,25 @@ class HolyChalice
          when ALBE_NUM + 1
            @ally_berserker[j] = data[j].to_i
          when ENLA_NUM + 1
-           if data[j + minusmv] == "-"
-             minusmv += 1
-             num = data[j + minusmv].to_i * -1
+           if data[j + $minusmv] == "-"
+             $minusmv += 1
+             num = data[j + $minusmv].to_i * -1
            else
-             num = data[j + minusmv].to_i
+             num = data[j + $minusmv].to_i
            end
            @enemy_lancer[j] = num
          when ENSA_NUM + 1
-           if data[j + minusmv] == "-"
-             minusmv += 1
-             num = data[j + minusmv].to_i * -1
+           if data[j + $minusmv] == "-"
+             $minusmv += 1
+             num = data[j + $minusmv].to_i * -1
            else
-             num = data[j + minusmv].to_i
+             num = data[j + $minusmv].to_i
            end
            @enemy_saber[j] = num
          when ENBE_NUM + 1
-           if data[j + minusmv ] == "-"
-             minusmv += 1
-             num = data[j + minusmv].to_i * -1
-           else
-             num = data[j + minusmv].to_i
-           end
-           @enemy_berserker[j] = num
+           @enemy_berserker[j] = check_minus(data,j)
          end
-         if j + minusmv > 5
+         if j + $minusmv > 5
            break
          end
        end
@@ -121,5 +115,18 @@ class HolyChalice
 
   def get_turn
     return @turn_status
+  end
+
+  private 
+
+  def check_minus(data,j)
+    num = 0
+    if data[j + $minusmv ] == "-"
+      $minusmv += 1
+      num = data[j + $minusmv].to_i * -1
+    else
+      num = data[j + $minusmv].to_i
+    end
+    return num
   end
 end
